@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const cors = require("cors");
 const express =  require("express");
 const { uuid, isUuid } = require("uuidv4");
@@ -92,7 +94,6 @@ app.put('/scrapbook/:id', (request, response) => { //Edita scraps
 
 app.delete('/scrapbook/:id', (request, response) => {// Deleta scraps
     const { id } = request.params;
-    const { title, message } = request.params;
 
     const scrapIndex = scraps.findIndex(scrap => scrap.id == id);
 
@@ -105,7 +106,7 @@ app.delete('/scrapbook/:id', (request, response) => {// Deleta scraps
     return response.status(204).send(); //código de sucesso com resposta vazia
 });
 
-const port = 3333;
+const port =  process.env.PORT || 3333;
 app.listen(port, () => {
     console.log(`Server up nd running on PORT ${port}`)
 });
