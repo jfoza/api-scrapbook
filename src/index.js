@@ -1,9 +1,11 @@
+const cors = require("cors");
 const express =  require("express");
 const { uuid, isUuid } = require("uuidv4");
 const { request } = require("express");
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 const scraps = [];
@@ -46,7 +48,7 @@ app.use(logRequests);
 app.use(validateTitleAndMessage);
 app.use("/projects/:id", validaId);
 
-app.get('/projects', (request, response) => { //Busca os scraps inseridos
+app.get('/scrapbook', (request, response) => { //Busca os scraps inseridos
     const { title } = request.query;
 
     const results = title
@@ -57,7 +59,7 @@ app.get('/projects', (request, response) => { //Busca os scraps inseridos
     return response.json(results);
 });
 
-app.post('/projects', (request, response) => { //Insere scraps
+app.post('/scrapbook', (request, response) => { //Insere scraps
     const { title, message } = request.body;
 
     const scrap = { id: uuid(), title, message };
@@ -67,7 +69,7 @@ app.post('/projects', (request, response) => { //Insere scraps
     return response.json(scrap);
 });
 
-app.put('/projects/:id', (request, response) => { //Edita scraps
+app.put('/scrapbook/:id', (request, response) => { //Edita scraps
     const { id } = request.params;
     const { title, message } = request.body;
 
@@ -88,7 +90,7 @@ app.put('/projects/:id', (request, response) => { //Edita scraps
     return response.json(scrap);
 }); 
 
-app.delete('/projects/:id', (request, response) => {// Deleta scraps
+app.delete('/scrapbook/:id', (request, response) => {// Deleta scraps
     const { id } = request.params;
     const { title, message } = request.params;
 
