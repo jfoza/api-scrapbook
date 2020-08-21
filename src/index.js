@@ -50,7 +50,7 @@ app.use(logRequests);
 app.use(validateTitleAndMessage);
 app.use("/projects/:id", validaId);
 
-app.get('/scrapbook', (request, response) => { //Busca os scraps inseridos
+app.get('/scraps', (request, response) => { //Busca os scraps inseridos
     const { title } = request.query;
 
     const results = title
@@ -61,7 +61,7 @@ app.get('/scrapbook', (request, response) => { //Busca os scraps inseridos
     return response.json(results);
 });
 
-app.post('/scrapbook', (request, response) => { //Insere scraps
+app.post('/scraps', (request, response) => { //Insere scraps
     const { title, message } = request.body;
 
     const scrap = { id: uuid(), title, message };
@@ -71,7 +71,7 @@ app.post('/scrapbook', (request, response) => { //Insere scraps
     return response.json(scrap);
 });
 
-app.put('/scrapbook/:id', (request, response) => { //Edita scraps
+app.put('/scraps/:id', (request, response) => { //Edita scraps
     const { id } = request.params;
     const { title, message } = request.body;
 
@@ -92,7 +92,7 @@ app.put('/scrapbook/:id', (request, response) => { //Edita scraps
     return response.json(scrap);
 }); 
 
-app.delete('/scrapbook/:id', (request, response) => {// Deleta scraps
+app.delete('/scraps/:id', (request, response) => {// Deleta scraps
     const { id } = request.params;
 
     const scrapIndex = scraps.findIndex(scrap => scrap.id == id);
